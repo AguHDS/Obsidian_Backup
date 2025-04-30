@@ -1,0 +1,18 @@
+### Ejemplo usando la api de Telegram "onmessage"
+
+#### Creamos nuestro primer nodo
+1. Necesitamos "credential" (access token) brindado por este servicio para usar su api. Preguntale a chatgpt o busca informacion sobre como conseguirla
+2.  Una vez hecho eso, BotFather de telegram te va a preguntar cosas para crear nuestro primer bot. Elije la opcion /newbot, dale el nombre que quieras (botForTesting), luego un username para el bot terminado en _bot, puede ser myfirstAI_bot. Entonces te dara un **Access token** para que podamos usar la api. Este access token debes usarlo en el nodo que pide eso de telegram, que habiamos elegido con el evento onmessage, que va a ser el disparador.
+
+#### Probamos el nodo
+1. Le damos test workflow, podemos chatear en el chat de nuestro bot para probar como funciona, elije la opcion "test step" 
+2. Ahora que tenemos una solicitud deberiamos seleccionar nuestro agente de IA. Seleccionamos advanced AI > Ai agent. 
+3. Ahora vamos a poder elegir el tipo de agente, usaremos Tool agent porque usaremos herramienta/tool, source for va a definir donde se presenta la variable de iteracion, vamos a definirla abajo, elegimos la opcion **expression**. Como este es un agente encargado de mirar correos en una base de datos y enviar mensajes, le vamos a dar esta instrucción y personalidad: Eres un agente encargado de enviar correo usando la herramienta "enviar_correo" y consultas los clientes en "bases_clientes". Hay que ser muy especifico y definir bien la estructura de mensajes, mientras mas especifico, mejor. Podemos usar chatgpt para que nos ayude con esto.
+
+#### Conectar nuestro modelo de lenguaje
+El nodo de agente ai nos va a dar 3 conectores, modelo, memory y tool.
+1. OpenAI va a ser nuestro modelo de lenguaje, vamos a necesitar el access token tambien para usar esta api. 
+2. Conectar la memoria: Hay diferentes memorias, Windows buffer memory es la mas basica, para probar esta bien usar esta. 1. Definimos below > la key seria el número de usuario, ponemos 1 y abajo 5
+3. Ahora la Tool: Asumimos que el empresario trabaja con Excel para DB, elegimos google sheets. 1: completamos credenciales, podes conectarte con tu ceunta de gMail, y tener una pagina donde tenes asociada todos los clientes. Tool description > Set automatically, Resource > Sheet within Document, Operation > Get Rows, Document From list: Aca elegiriamos nuestro documento, por ejemplo si tenemos uno que se llama CONTACTOS_CLIENTES elegiriamos ese, Sheet: La hoja 1, si tenemos la info ahí. Importante: hay que darle un nombre en laparte de arriba, este nombre esta asociado a la referencia que le dimos en la instruccion de pesronalidad al agente, por ejemplo le habiamos dicho "Eres un asistente que envia correos,consultas tu base de contactos "contactos_clientes", tenemos que darle "contactos_clientes"  entonces, para que lo asocie.  Ahora el ultimo paso seria conectar en el "+" la herramienta de Gmail arriba de la tool.
+4. En el nodo de Gmail vamos a usar la funcion que habaimos estudiado $fromAI(), asi que donde dice To? escribe: {{ $fromAI("correo") }}, y selecciona "expression", de esta forma simplificamos mucho el uso de esto. En subject {{  $fromAI("asunto")  }}, Email type = Text y mensaje {{  $fromAI("mensaje_correo","aqui el cuerpo de correo con salto de linea tras el saludo")  }} <- podemos encadenar de esta manera mas configuraciones. El nombre de la tool va a ser "enviar_correo", porque le habiamos dado ese nombre en la personalidad del bot.
+5. Falta crear el nodo para que nos envie el correo con el mensaje. Esto te lo dejo para que lo hagas con ayuda de chatgpt, pero basicamente usas Telegram con "message". Prueba escribiendo en el chatbot "envia un correo a "agustin o mi usuario" "
