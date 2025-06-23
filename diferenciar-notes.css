@@ -1,0 +1,9 @@
+/* Notas (archivos) en amarillo suave (#fffd8b) */
+.nav-file-title {
+  color: #b4bd82 !important;
+}
+
+/* Carpetas en azul claro (#CFE0FF) */
+.nav-folder-title {
+  color: #8486c0 !important;
+}
