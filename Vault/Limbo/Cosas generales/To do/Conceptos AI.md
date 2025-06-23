@@ -1,2 +1,0 @@
-Crear note para 
-. Embedidng
