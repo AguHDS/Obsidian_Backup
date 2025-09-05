@@ -4,6 +4,8 @@ tags:
   - POO
   - rust
 ---
+tags: [[POO]]
+
 ---
 
 #### Que es una referencia?
