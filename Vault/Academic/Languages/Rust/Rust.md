@@ -1,8 +1,6 @@
 ---
 tags:
   - principal
----
-tags: [[POO]]
 
 ---
 
