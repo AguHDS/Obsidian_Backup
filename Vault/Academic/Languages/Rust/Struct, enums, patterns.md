@@ -116,6 +116,17 @@ Entonces:
 -  Si usás **llaves** `{}` → es como un **struct**: cada campo tiene nombre.
 -  Si no usás nada → es solo una **etiqueta sin datos**.
 
+podemos desestructurar un valor con **if let**. Es una especie de atajo más conciso que usar `match` cuando solo te importa **un solo caso**.
+```rust
+let any_num: Option<i8> = Some(24);
+
+if let Some(i: 18) = any_num() {
+	println!("Numero es: {}", i);
+} else {
+	println!("No hay ningún valor");
+}
+```
+
 Dato: 
 En ese ultimo ejemplo se esta usando **pattern binding**, estas diciendo: _“dame lo que está adentro y asígnalo a esta variable”_. Por eso parece que Texto(string) espera un argumento como si fuera una función, pero no lo es.
 Las enums de rust son las mas parecidas a las que podemos encontrar en F# o en Haskell
