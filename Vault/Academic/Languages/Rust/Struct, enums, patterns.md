@@ -64,6 +64,7 @@ Note:
 
 #### Enums
 
+Las enums de rust son las mas parecidas a las que podemos encontrar en F# o en Haskell
 Los enums son un tipo que puede tener **varios valores posibles**, llamados **variantes**:
 En Rust, **cada variante de un enum puede llevar datos asociados**.  
 La sintaxis cambia según cómo quieras guardar esos datos
