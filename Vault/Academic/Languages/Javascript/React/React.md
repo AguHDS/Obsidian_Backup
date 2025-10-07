@@ -10,6 +10,7 @@ tags:
 [[Vault/Academic/Languages/Javascript/React/Context]]
 [[Context-Aware Component]]
 [[fetch custom hook]]
+[[Lazy loading (react)]]
 
 #### Patrónes de diseño
 
